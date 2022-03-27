@@ -13,6 +13,7 @@ prod_deployment_path = os.path.join(config['prod_deployment_path'])
 if not os.path.exists(prod_deployment_path):
     os.makedirs(prod_deployment_path)
 
+
 # Function for deployment
 def store_model_into_pickle():
     """

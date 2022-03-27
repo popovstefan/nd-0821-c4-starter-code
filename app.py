@@ -33,7 +33,7 @@ def predict():
 def scoring():
     """check the score of the deployed model"""
     # add return value (a single F1 score number)
-    return str(score_model())
+    return str(score_model(False))
 
 
 # Summary Statistics Endpoint

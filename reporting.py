@@ -19,7 +19,7 @@ def score_model():
     calculate a confusion matrix using the test data and the deployed model
     write the confusion matrix to the workspace
     """
-    y_true, y_pred = model_predictions()
+    y_true, y_pred = model_predictions(None)
     disp = ConfusionMatrixDisplay(confusion_matrix(y_true, y_pred)).plot()
     disp.ax_.figure.savefig(os.path.join(model_path, "confusionmatrix.png"))
 
