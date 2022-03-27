@@ -15,8 +15,6 @@ with open('config.json', 'r') as f:
 
 dataset_csv_path = os.path.join(config['output_folder_path'])
 
-prediction_model = None
-
 
 # Prediction Endpoint
 @app.route("/prediction", methods=['POST', 'OPTIONS'])
@@ -49,10 +47,7 @@ def stats():
 def diagnostics():
     """check timing and percent NA values"""
     # add return value for all diagnostics
-    et = execution_time()
-    md = missing_data()
-    op = outdated_packages_list()
-    return str("execution_time:" + et + "\nmissing_data;" + md + "\noutdated_packages:" + op)
+    return str("execution_time:" + execution_time() + "\nmissing_data;" + missing_data() + "\noutdated_packages:" + outdated_packages_list())
 
 
 if __name__ == "__main__":
