@@ -28,7 +28,8 @@ def merge_multiple_dataframe():
     # drop duplicates
     df.drop_duplicates(inplace=True)
     # create output directory
-    os.makedirs(output_folder_path)
+    if not os.path.exists(output_folder_path):
+        os.makedirs(output_folder_path)
     # save final dataframe result
     df.to_csv(output_folder_path + "/finaldata.csv", index=False)
     # save log
