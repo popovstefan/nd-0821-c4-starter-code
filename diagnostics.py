@@ -17,11 +17,13 @@ model_path = os.path.join(config["output_model_path"])
 
 
 # Function to get model predictions
-def model_predictions():
+def model_predictions(data_set_path):
     """Read the deployed model and a test dataset, calculate predictions"""
+    if data_set_path is None:
+        data_set_path = "testdata.csv"
     df = pd.read_csv(os.path.join(test_data_path, "testdata.csv"))
     model = joblib.load(os.path.join(model_path, "trainedmodel.pkl"))
-    return model.predict(df.drop(columns=["exited", "corporation"]))
+    return model.predict(df.drop(columns=["exited", "corporation"])), df["exited"]
 
 
 # Function to get summary statistics
@@ -59,7 +61,7 @@ def execution_time():
         end = time.time()
         result.append([script, end - start])
     # return a list of 2 timing values in seconds
-    return result
+    return str(result)
 
 
 # Function to check dependencies
@@ -70,7 +72,7 @@ def outdated_packages_list():
 
 
 if __name__ == '__main__':
-    model_predictions()
+    model_predictions(None)
     dataframe_summary()
     missing_data()
     execution_time()
