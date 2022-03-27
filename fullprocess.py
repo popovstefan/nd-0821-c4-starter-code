@@ -44,11 +44,11 @@ with open(os.path.join(prod_deployment_path, "latestscore.txt"), "r") as f:
 
 # Deciding whether to proceed, part 2
 # if you found model drift, you should proceed. otherwise, do end the process here
-
-if new_f1 >= old_f1:
+if new_f1 > old_f1:
     sys.exit(0)
 
 training.train_model()
+scoring.score_model(prod=True)
 
 # Re-deployment
 # if you found evidence for model drift, re-run the deployment.py script
@@ -58,3 +58,4 @@ deployment.store_model_into_pickle()
 # run diagnostics.py and reporting.py for the re-deployed model
 os.system("python diagnostics.py")
 os.system("python reporting.py")
+os.system("python apicalls.py")
